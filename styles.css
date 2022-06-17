@@ -1,0 +1,115 @@
+:root{
+  --primary-color:#122e46;
+  --dark-primary-color:#05131e;
+  --text-color: #e8ebe8;
+  --accent-color: #e50442;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  font-family: 'Inconsolata', monospace;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+}
+
+header{
+  width: 100vw;
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+  background-color: var(--dark-primary-color);
+  font-size: 1.5rem;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
+
+}
+
+header h1{
+  color: var(--accent-color);
+  font-size: 3rem;
+}
+
+.random-cats{
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  height: 220px;
+  width: 80%;
+  max-width: 850px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+
+.random-cats article{
+  width: 65%;
+  min-width: 200px;
+  max-width: 230px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color:var(--dark-primary-color) ;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.random-cats article img{
+  width: 80%;
+  height: 70%;
+  border-radius: 10px;
+  object-position: center;
+  object-fit: fill;
+}
+
+article div{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+ 
+}
+.random-cats article div span{
+  font-size: 1.8rem;
+  margin-top: 5px;
+  text-align: center;
+  color: var(--text-color);
+  
+}
+.random-cats article div button{
+  width: 30px;
+  height: 30px;
+  font-size: 1.8rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--accent-color);
+  cursor:pointer;
+  
+}
+#random-cats article div button .fa-solid:last-child {
+  display: none;
+}
+#random-cats article div button:hover .fa-solid {
+  display: block;
+}
+#random-cats article div button:hover .fa-regular{
+  display: none;
+}
+
+
+h2,#error{
+  color: var(--accent-color);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 50px;
+}
