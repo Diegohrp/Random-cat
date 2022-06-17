@@ -17,9 +17,7 @@ async function getRandomCats() {
 }
 
 async function getFavoriteCats() {
-  const response = await fetch(
-    `${API_URL}/favourites?limit=8&api_key=${API_KEY}`
-  );
+  const response = await fetch(`${API_URL}/favourites?api_key=${API_KEY}`);
   const data = await response.json();
 
   if (response.status !== 200) {
@@ -28,7 +26,7 @@ async function getFavoriteCats() {
       'Ha ocurrido un error ' + response.status + ': ' + data.message;
   } else {
     const section = document.getElementById('favorite-cats');
-    //section.innerHTML = '';
+    section.innerHTML = '';
     const favorites = data.map((item) => {
       const article = document.createElement('article');
       const img = document.createElement('img');
@@ -40,6 +38,7 @@ async function getFavoriteCats() {
       img.src = item.image.url;
       //Asignamos el icono al botón
       button.innerHTML = `<i class="fa-solid fa-circle-minus"></i>`;
+      button.onclick = () => deleteFromFav(item.id);
       //Asignamos el texto al span
       span.innerText = item.image.id;
       //Creamos los nodos
@@ -48,6 +47,7 @@ async function getFavoriteCats() {
       return article;
     });
     section.append(...favorites);
+    console.log(data);
   }
 }
 
@@ -70,6 +70,25 @@ async function addFavorite(id) {
     console.log(data);
     getFavoriteCats();
   }
+}
+
+async function deleteFromFav(id) {
+  const response = await fetch(
+    `${API_URL}/favourites/${id}?api_key=${API_KEY}`,
+    {
+      method: 'DELETE',
+    }
+  );
+  const data = await response.json();
+
+  if (response.status !== 200) {
+    const spanError = document.querySelector('#error');
+    spanError.innerText =
+      'Ha ocurrido un error ' + response.status + ': ' + data.message;
+  } else {
+    getFavoriteCats();
+  }
+  console.log(data);
 }
 
 getRandomCats();
