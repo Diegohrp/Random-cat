@@ -85,7 +85,13 @@
         </section>
         <form id="formPhoto">
           <div class="input-container">
-            <input type="file" name="file" id="file" value="Hola" />
+            <img id="preview" />
+            <input
+              type="file"
+              name="file"
+              id="file"
+              onchange="previewImage();"
+            />
             <label>
               Upload your own image
               <i class="fa-solid fa-image"></i>

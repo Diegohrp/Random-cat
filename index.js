@@ -97,9 +97,26 @@ async function deleteFromFav(id) {
   console.log(data);
 }
 
+function previewImage() {
+  const preview = document.getElementById('preview');
+  //Es un objeto con los atributos 0 y lenght
+  const file = document.getElementById('file').files;
+
+  if (file.length > 0) {
+    console.log(file);
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => (preview.src = e.target.result);
+    //Obtenemos el atributo con nombre 0 del objeto file
+    fileReader.readAsDataURL(file[0]);
+    preview.style.visibility = 'visible';
+  }
+}
+
 async function uploadPhoto() {
   const form = document.getElementById('formPhoto');
   const formData = new FormData(form);
+  const preview = document.getElementById('preview');
+  preview.style.visibility = 'hidden';
 
   const request = await fetch(`${API_URL}/images/upload`, {
     method: 'POST',
