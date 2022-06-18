@@ -104,7 +104,7 @@ article div{
   
 }
 
-.random-cats__button{
+.general-button{
   height: 30px;
   font-family: 'Inconsolata', monospace;
   color: var(--accent-color);
@@ -117,7 +117,7 @@ article div{
   cursor: pointer;
 }
 
-.random-cats__button:hover{
+.general-button:hover{
   background-color: var(--accent-color);
   color: var(--text-color);
   border: 2px solid var(--text-color);
@@ -139,6 +139,70 @@ h2,#error{
   font-size: 2.5rem;
   text-align: center;
   margin-top: 30px;
+}
+#error{
+  margin-bottom: 30px;
+}
+
+form{
+  background-color: var(--dark-primary-color);
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  position: relative;
+}
+form .general-button{
+  margin: 0;
+  width: 180px;
+  height: 30px;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: calc(50% - 90px );
+
+}
+.input-container{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+.input-container label{
+  width: 100%;
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+  font-size: 3rem;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  position: absolute;  
+}
+.input-container label i{
+  font-size: 5rem;
+}
+
+.input-container input[type="file"]{
+  opacity: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+.input-container input[type="file"]:hover~label{
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+  
 }
 
 @media (min-width:700px) {

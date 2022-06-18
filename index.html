@@ -67,7 +67,7 @@
             </div>
           </article>
         </section>
-        <button class="random-cats__button" onclick="getRandomCats();">
+        <button class="general-button" onclick="getRandomCats();">
           Get random cats
         </button>
       </section>
@@ -83,6 +83,18 @@
             </div>
           </article> -->
         </section>
+        <form id="formPhoto">
+          <div class="input-container">
+            <input type="file" name="file" id="file" value="Hola" />
+            <label>
+              Upload your own image
+              <i class="fa-solid fa-image"></i>
+            </label>
+          </div>
+          <button class="general-button" type="button" onclick="uploadPhoto();">
+            Upload your photo
+          </button>
+        </form>
         <span id="error"></span>
       </section>
     </main>

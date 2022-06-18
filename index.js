@@ -17,13 +17,18 @@ async function getRandomCats() {
 }
 
 async function getFavoriteCats() {
-  const response = await fetch(`${API_URL}/favourites?api_key=${API_KEY}`);
+  const response = await fetch(`${API_URL}/favourites`, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY,
+    },
+  });
   const data = await response.json();
 
   if (response.status !== 200) {
     const spanError = document.querySelector('#error');
     spanError.innerText =
-      'Ha ocurrido un error ' + response.status + ': ' + data.message;
+      'Unexpected error ' + response.status + ': ' + data.message;
   } else {
     const section = document.getElementById('favorite-cats');
     section.innerHTML = '';
@@ -47,15 +52,16 @@ async function getFavoriteCats() {
       return article;
     });
     section.append(...favorites);
-    console.log(data);
+    //console.log(data);
   }
 }
 
 async function addFavorite(id) {
-  const response = await fetch(`${API_URL}/favourites?api_key=${API_KEY}`, {
+  const response = await fetch(`${API_URL}/favourites`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-API-KEY': API_KEY,
     },
     body: JSON.stringify({
       image_id: id,
@@ -65,7 +71,7 @@ async function addFavorite(id) {
   if (response.status !== 200) {
     const spanError = document.querySelector('#error');
     spanError.innerText =
-      'Ha ocurrido un error ' + response.status + ': ' + data.message;
+      'Unexpected error ' + response.status + ': ' + data.message;
   } else {
     console.log(data);
     getFavoriteCats();
@@ -73,22 +79,44 @@ async function addFavorite(id) {
 }
 
 async function deleteFromFav(id) {
-  const response = await fetch(
-    `${API_URL}/favourites/${id}?api_key=${API_KEY}`,
-    {
-      method: 'DELETE',
-    }
-  );
+  const response = await fetch(`${API_URL}/favourites/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-API-KEY': API_KEY,
+    },
+  });
   const data = await response.json();
 
   if (response.status !== 200) {
     const spanError = document.querySelector('#error');
     spanError.innerText =
-      'Ha ocurrido un error ' + response.status + ': ' + data.message;
+      'Unexpected error ' + response.status + ': ' + data.message;
   } else {
     getFavoriteCats();
   }
   console.log(data);
+}
+
+async function uploadPhoto() {
+  const form = document.getElementById('formPhoto');
+  const formData = new FormData(form);
+
+  const request = await fetch(`${API_URL}/images/upload`, {
+    method: 'POST',
+    headers: {
+      'X-API-KEY': API_KEY,
+    },
+    body: formData,
+  });
+  if (request.status !== 201) {
+    const spanError = document.querySelector('#error');
+    spanError.innerText = 'Unexpected error: Upload a valid image';
+  } else {
+    const data = await request.json();
+    //console.log(request.status);
+    //console.log(data);
+    addFavorite(data.id);
+  }
 }
 
 getRandomCats();
